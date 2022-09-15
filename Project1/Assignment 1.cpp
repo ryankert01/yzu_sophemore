@@ -167,7 +167,7 @@ bool equal( unordered_set< T > &left, std::unordered_set< T > &right )
 
       ListIt leftBucketFirst = leftVecFirst[ 2 * bucketNo ];
       ListIt leftBucketLast = leftVecFirst[ 2 * bucketNo + 1 ];
-      RightIt rightBucketFirst = rightVecFirst[ 2 * bucketNo ];
+      RightIt rightBucketFirst = rightVecFirst[ 2 * bucketNo ]; // an iterator pointing to the first element in right._List for bucket bucketNo
       RightIt rightBucketLast = rightVecFirst[ 2 * bucketNo + 1 ];
 
       if( rightBucketFirst != rightListHead )
@@ -191,9 +191,9 @@ bool equal( unordered_set< T > &left, std::unordered_set< T > &right )
       }
    }
 
-   ListIt leftIt = *leftVecFirst;
+   ListIt leftIt = *leftVecFirst; 
    RightIt rightIt = *rightVecFirst;
-   while( rightIt != rightListHead )
+   while( rightIt != rightListHead ) // compare the whole list in left with the whole list in right
    {
       if( *leftIt != *rightIt )
          return false;
