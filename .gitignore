@@ -2,3 +2,5 @@ Debug
 *.sln
 *.vcxproj*
 .vs
+Release
+x64

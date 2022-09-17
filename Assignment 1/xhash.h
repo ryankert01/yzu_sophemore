@@ -40,7 +40,10 @@ struct HashVec
    // set the elements stored here to cells copies of val
    void assignGrow( const size_type cells, const value_type val )
    {
-
+       delete[] myData.myFirst;
+       myData.myFirst = new value_type[cells];
+       for (int i = 0; i < cells; i++)
+           myData.myFirst[i] = val;
 
    }
 
@@ -114,7 +117,11 @@ public:
       if( myVec.myData.myFirst[ 2 * n ] == myList.end() )
          return 0;
 
-
+      int count = 1;
+      iterator it2 = myVec.myData.myFirst[2 * n + 1];
+      for (iterator i = myVec.myData.myFirst[2 * n]; i != it2; i++)
+          count++;
+      return count;
    }
 
    // Inserts a new element in the unordered_set.
@@ -134,7 +141,15 @@ public:
 
             myVec.assignGrow( 2 * maxidx, myList.end() );
 
+            mask = maxidx - 1;
 
+            list<value_type> temp(myList);
+            myList.clear();
+
+            for (value_type it : temp) {
+                putIn(it);
+            }
+            temp.clear();
          }
 
          putIn( val );
@@ -149,8 +164,18 @@ public:
 
       if( it != myList.end() ) // found
       {
+          size_t idx = bucket(keyVal);
 
-
+          if (myVec.myData.myFirst[idx * 2] == myVec.myData.myFirst[idx * 2 + 1]) {
+              myVec.myData.myFirst[idx * 2] = myList.end();
+              myVec.myData.myFirst[idx * 2 + 1] = myList.end();
+          }
+          else if (*myVec.myData.myFirst[idx * 2] == keyVal) {
+              myVec.myData.myFirst[idx * 2]++;
+          }
+          else if (*myVec.myData.myFirst[idx * 2 + 1] == keyVal) {
+              myVec.myData.myFirst[idx * 2 + 1]--;
+          }
 
 
          myList.erase( it );
@@ -161,15 +186,26 @@ public:
    // returns an iterator to it if found, otherwise it returns myList.end()
    iterator find( const key_type &keyVal )
    {
-
+       int idx = bucket(keyVal);
+       iterator it = myVec.myData.myFirst[idx * 2], it2 = myVec.myData.myFirst[idx * 2 + 1];
+       if (it == myList.end()) return myList.end();
+       while (it != it2) {
+           if (*it == keyVal)
+               return it;
+           it++;
+       }
+       if (*it == keyVal) return it;
+       return myList.end();
    }
 
 private:
    // put a new element in the unordered_set when myVec is large enough
    void putIn( const value_type &val )
    {
-
-
+       size_t idx = bucket(val);
+       myVec.myData.myFirst[idx * 2] = myList.insert(myVec.myData.myFirst[idx * 2], val);
+       if (myVec.myData.myFirst[idx * 2 + 1] == myList.end())
+           myVec.myData.myFirst[idx * 2 + 1] = myVec.myData.myFirst[idx * 2];
    }
 
 protected:
