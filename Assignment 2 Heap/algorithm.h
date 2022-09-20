@@ -10,12 +10,12 @@ namespace MyNamespace
    {
       if (hole == top)
          return;
-      RanIt it = first + (hole + 1) / 2;
+      RanIt it = first + (hole - 1) / 2;
       if (pred(val, *it))
       {
          *(first + hole) = *it;
          *it = val;
-         pushHeapByIndex(first, (hole + 1) / 2, top, val, pred);
+         pushHeapByIndex(first, (hole - 1) / 2, top, val, pred);
       }
    }
 
@@ -28,14 +28,59 @@ namespace MyNamespace
       {
          --last;
          typename RanIt::value_type val = *last;
-         --count
-             pushHeapByIndex(first, count, 0, val, pred);
+         --count;
+         pushHeapByIndex(first, count, 0, val, pred);
       }
    }
 
    template <typename RanIt, typename Ty, typename Pr>
-   inline void popHeapHoleByIndex(RanIt first, ptrdiff_t hole, ptrdiff_t bottom, Ty &val, Pr pred)
+   inline void popHeapHoleByIndex(RanIt first, ptrdiff_t hole, ptrdiff_t bottom, Ty &val, Pr pred, bool k = true)
    {
+       ptrdiff_t idx = hole * 2 + 1;
+       ptrdiff_t decidedNode;
+
+       if (idx + 1 < bottom) {
+           decidedNode = pred(*(first + idx), *(first + idx + 1)) ? idx + 1 : idx;
+       }
+       else if (idx < bottom) {
+           decidedNode = idx;
+       }
+       else {
+           return;
+       }
+       if (pred(*(first + hole), *(first + decidedNode))) {
+           Ty temp = val;
+           *(first + hole) = *(first + decidedNode);
+           *(first + decidedNode) = temp;
+           popHeapHoleByIndex(first, decidedNode, bottom, *(first + decidedNode), pred);
+       }
+
+       
+       /*
+       if (idx + 1 < bottom && pred(*(first + hole), *(first + idx + 1))) {
+           Ty temp = *(first + hole);
+           *(first + hole) = *(first + idx + 1);
+           *(first + idx + 1) = temp;
+           popHeapHoleByIndex(first, idx + 1, bottom, *(first + idx + 1), pred,0);
+           for (ptrdiff_t i = 0; i < bottom; i++)
+               cout << *(first + i) << " ";
+           cout << endl;
+       }
+       if (idx < bottom && pred(*(first + hole), *(first + idx))) {
+           Ty temp = *(first + hole);
+           *(first + hole) = *(first + idx);
+           *(first + idx) = temp;
+           popHeapHoleByIndex(first, idx, bottom, *(first + idx), pred, 0);
+           for (ptrdiff_t i = 0; i < bottom; i++)
+               cout << *(first + i) << " ";
+           cout << endl;
+       }
+       // debug
+       if (k) { 
+           for (ptrdiff_t i = 0; i < bottom; i++) 
+               cout << *(first + i) << " "; 
+           cout << endl; 
+       }*/
    }
 
    // pop *first to *(last - 1) and reheap, using pred

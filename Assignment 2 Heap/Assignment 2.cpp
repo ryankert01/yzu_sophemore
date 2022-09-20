@@ -36,11 +36,32 @@ bool equal( T1 &v1, T2 &v2 );
 
 int main()
 {
+    /**/
+    for (int k = 3; k < 100; k++) {
+        using vt = vector<int>;
+        srand(123);
+        vector<int> v;
+        for (int i = 0; i < k; i++)
+            v.push_back(1+rand() % 100);
+        std::priority_queue<int, vector<int>> pq1(v.begin(), v.end());
+        priority_queue<int, vector<int>> pq2(v.begin(), v.end());
+        vt v1 = *(reinterpret_cast<vt*>(&pq1));
+        vt v2 = *(reinterpret_cast<vt*>(&pq2));
+        /*
+        for (auto i : v1) cout << i << " "; cout << endl;
+        for (auto i : v2) cout << i << " "; cout << endl;*/
+        if (!equal(v1, v2))
+            cout << k << " ";
+    }
+    cout << endl;
+
+    
+    
    testPriorityQueue< char >();
    testPriorityQueue< short >();
    testPriorityQueue< long >();
    testPriorityQueue< long long >();
-
+   /**/
    system( "pause" );
 }
 
@@ -49,7 +70,7 @@ void testPriorityQueue()
 {
    testContructor< T, vector< T >, std::vector< T > >();
    testContructor< T, vector< T >, std::vector< T >, greater< T >, std::greater< T > >();
-
+   /*
    testPush< T, vector< T >, std::vector< T > >();
    testPush< T, vector< T >, std::vector< T >, greater< T >, std::greater< T > >();
 
@@ -70,7 +91,7 @@ void testPriorityQueue()
 
    testPushPop< T, deque< T >, std::deque< T > >();
    testPushPop< T, deque< T >, std::deque< T >, greater< T >, std::greater< T > >();
-
+   */
    cout << endl;
 }
 
