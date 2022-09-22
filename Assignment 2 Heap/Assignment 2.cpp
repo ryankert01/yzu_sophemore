@@ -39,7 +39,7 @@ int main()
     /**/
     for (int k = 3; k < 100; k++) {
         using vt = vector<int>;
-        srand(123);
+        srand(12);
         vector<int> v;
         for (int i = 0; i < k; i++)
             v.push_back(1+rand() % 100);
@@ -50,6 +50,10 @@ int main()
         /*
         for (auto i : v1) cout << i << " "; cout << endl;
         for (auto i : v2) cout << i << " "; cout << endl;*/
+        if (k == 17) {
+            for (auto i : v1) cout << i << " "; cout << endl;
+            for (auto i : v2) cout << i << " "; cout << endl;
+        }
         if (!equal(v1, v2))
             cout << k << " ";
     }
