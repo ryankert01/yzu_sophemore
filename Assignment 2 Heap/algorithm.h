@@ -8,15 +8,16 @@ namespace MyNamespace
    template <typename RanIt, typename Ty, typename Pr>
    inline void pushHeapByIndex(RanIt first, ptrdiff_t hole, ptrdiff_t top, Ty &val, Pr pred)
    {
-      if (hole == top)
-         return;
-      RanIt it = first + (hole - 1) / 2;
-      if (pred(val, *it))
-      {
-         *(first + hole) = *it;
-         *it = val;
-         pushHeapByIndex(first, (hole - 1) / 2, top, val, pred);
-      }
+       ptrdiff_t idx = (hole-1) / 2;
+       while (hole != top) {
+           if (pred(first[idx], val)) {
+               first[hole] = first[idx];
+               hole = idx;
+               idx = (hole-1) / 2;
+           }
+           else break;
+       }
+       first[hole] = val;
    }
 
    // push *(last - 1) onto heap at [first, last - 1), using pred
@@ -36,12 +37,26 @@ namespace MyNamespace
    template <typename RanIt, typename Ty, typename Pr>
    inline void popHeapHoleByIndex(RanIt first, ptrdiff_t hole, ptrdiff_t bottom, Ty &val, Pr pred)
    {
+       
        ptrdiff_t idx = hole * 2 + 1;
-       ptrdiff_t decidedNode = INFINITY;
+       while (idx < bottom) {
+           idx = (idx + 1 < bottom && !pred(first[idx + 1], first[idx])) ? idx + 1 : idx;
+           if (pred(val, first[idx])) {
+               first[hole] = first[idx];
+               hole = idx;
+               idx = idx * 2 + 1;
+           }
+           else break;
+       }
+       first[hole] = val;
+/* 
+ // recursive method
+       ptrdiff_t idx = hole * 2 + 1;
+       ptrdiff_t decidedNode;
 
-       if (idx + 1 < bottom) 
-           decidedNode = pred(first[idx], first[idx+1]) ? idx + 1 : idx;
-       else if (idx < bottom) 
+       if (idx + 1 < bottom)
+           decidedNode = !pred(first[idx + 1], first[idx]) ? idx + 1 : idx;
+       else if (idx < bottom)
            decidedNode = idx;
        else {
            first[hole] = val;
@@ -55,6 +70,7 @@ namespace MyNamespace
            popHeapHoleByIndex(first, decidedNode, bottom, first[decidedNode], pred);
        }
        else first[hole] = val;
+*/
    }
 
    // pop *first to *(last - 1) and reheap, using pred
