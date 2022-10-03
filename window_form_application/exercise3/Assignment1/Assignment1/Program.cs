@@ -1,4 +1,4 @@
-namespace _1103339_ex_3_1
+namespace Assignment1
 {
     internal static class Program
     {

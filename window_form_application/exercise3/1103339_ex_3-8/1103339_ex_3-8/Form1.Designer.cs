@@ -1,4 +1,4 @@
-﻿namespace _1103339_ex_3_1
+﻿namespace _1103339_ex_3_8
 {
     partial class Form1
     {
@@ -37,8 +37,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.ResumeLayout(false);
 
         }
