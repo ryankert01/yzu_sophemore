@@ -22,6 +22,7 @@ namespace Assignment2
         private void Form1_Load(object sender, EventArgs e)
         {
             init();
+            label3.Text = "Designated AI with difficulty of easy.";
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -50,7 +51,24 @@ namespace Assignment2
             }
         }
 
-
+        private bool full()
+        {
+            bool playValid = true;
+            if (onPlay)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (matrix[i, j] == 0)
+                        {
+                            playValid = false;
+                        }
+                    }
+                }
+            }
+            return playValid;
+        }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -74,16 +92,24 @@ namespace Assignment2
             {
                 if (checkWin() == 1)
                     return;
-                int a = bestMove();
-                a -= 100;
-                matrix[a / 10, a % 10] = -1;
-                Invalidate();
+                if(!full())
+                {
+                    int a = bestMove();
+                    a -= 100;
+                    matrix[a / 10, a % 10] = -1;
+                    Invalidate();
+                }
                 checkWin();
             }
         }
 
         private int checkWin()
         {
+            if (full())
+            {
+                label2.Text = "Draw!!!";
+                return 0;
+            }
             dynamic m = matrix;
             for(int i = 0; i < 3; i++)
             {
@@ -159,6 +185,7 @@ namespace Assignment2
         }
 
         int[,] mat;
+        const int win = 10000, lost = -10000, draw = 1;
 
         private int bestMove()
         {
@@ -186,7 +213,6 @@ namespace Assignment2
                                     mxr = 100 + i * 10 + j;
                                 }
                             }
-
                         }
                         else if (axiom == -1)
                         {
@@ -199,6 +225,7 @@ namespace Assignment2
             }
             return mxr;
         }
+
 
         private int dfs(int c)
         {
