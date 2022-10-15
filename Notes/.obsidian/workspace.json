@@ -1,0 +1,146 @@
+{
+  "main": {
+    "id": "1f5efd8237952d09",
+    "type": "split",
+    "children": [
+      {
+        "id": "45c7704fe04be732",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "25e8d52afaf8bf6d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Linear Algebra/1.7 Linear Independent & Linear dependent.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7406dc5b1fe32991",
+    "type": "split",
+    "children": [
+      {
+        "id": "70fc63d080d2b576",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3b28eae65ee7a931",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "5a1ce3e495dc5ebe",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "cb6c47482f6186c1",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b7b75ba75295b6a5",
+    "type": "split",
+    "children": [
+      {
+        "id": "67c53b912b0544cd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9bedd94ae85f0a33",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Linear Algebra/1.7 Linear Independent & Linear dependent.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "0684da6b0e0d8e57",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Linear Algebra/1.7 Linear Independent & Linear dependent.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ea79c223da85d70c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "90540eec20e079d8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Linear Algebra/1.7 Linear Independent & Linear dependent.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "ribbon": {
+    "mostRecentAction": ""
+  },
+  "active": "25e8d52afaf8bf6d",
+  "lastOpenFiles": [
+    "Linear Algebra/1.7 Linear Independent & Linear dependent.md"
+  ]
+}
